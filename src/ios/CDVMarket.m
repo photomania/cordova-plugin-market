@@ -32,4 +32,24 @@
     }];
 }
 
+- (void)openReviewTab:(CDVInvokedUrlCommand *)command
+{
+    [self.commandDelegate runInBackground:^{
+        NSArray *args = command.arguments;
+        NSString *appId = [args objectAtIndex:0];
+        
+        CDVPluginResult *pluginResult;
+        if (appId) {
+            NSString *url = [NSString stringWithFormat:@"https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=%@&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8", appId];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        } else {
+            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid application id: null was found"];
+        }
+        
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 @end

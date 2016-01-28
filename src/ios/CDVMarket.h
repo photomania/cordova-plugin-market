@@ -11,4 +11,6 @@
 
 - (void)open:(CDVInvokedUrlCommand *)command;
 
+- (void)openReviewTab:(CDVInvokedUrlCommand *)command;
+
 @end

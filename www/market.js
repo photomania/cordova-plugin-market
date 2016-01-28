@@ -12,5 +12,10 @@ Market.prototype.open = function(appId, callbackContext) {
     exec(callbackContext.success || null, callbackContext.error || null, 'Market', 'open', [appId]);
 };
 
+Market.prototype.openReviewTab = function(appId, callbackContext) {
+    callbackContext = callbackContext || { };
+    exec(callbackContext.success || null, callbackContext.error || null, 'Market', 'openReviewTab', [appId]);
+};
+
 var market = new Market();
 module.exports = market;
